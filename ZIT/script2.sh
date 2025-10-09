@@ -1,24 +1,23 @@
 #!/bin/bash
 
 # =======================================================
-# Analýza obsahu webové stránky (Kompatibilní s Bash 3.2)
-# Použití: ./analyza_webu.sh <URL>
+# Skript pro analýzu obsahu webové stránky
+# (Kompatibilní s Bash v3.2)
 # =======================================================
 
 # Kontrola, zda byl zadán parametr URL
 URL="$1"
-
 if [ -z "$URL" ]; then
-    echo "Chyba: Skript vyžaduje jeden argument (URL stránky)."
-    echo "Použití: $0 https://adresa.cz"
+    echo "Chyba: Skript vyžaduje zadání URL stránky jako argument."
+    echo "Použití: $0 URL_stránky"
     exit 1
 fi
 
-# Stažení obsahu webové stránky
-# Používáme curl -s (silent mode) pro stažení HTML obsahu do proměnné.
-# Pro velké stránky by se z hlediska paměti OS hodilo použít dočasný soubor,
-# ale pro standardní webové stránky je proměnná dostačující a rychlejší.
-PAGE_CONTENT=$(curl -s "$URL")
+# Stažení HTML obsahu do proměnné
+# -s: tichý režim
+# -L: sleduje přesměrování
+# --compressed: umožňuje přijímat komprimovaný obsah (např. seznam.cz)
+PAGE_CONTENT=$(curl -s -L --compressed "$URL")
 
 # Kontrola, zda curl vrátil chybu
 if [ $? -ne 0 ]; then
@@ -26,19 +25,17 @@ if [ $? -ne 0 ]; then
     exit 2
 fi
 
-# Analýza textu
 # Počet výskytů řetězce "http"
 # grep -o: vypíše každý nalezený řetězec na nový řádek
-# wc -l: spočítá počet těchto řádků (tedy počet výskytů)
+# wc -l: spočítá počet těchto řádků (počet výskytů)
 HTTP_COUNT=$(echo "$PAGE_CONTENT" | grep -o "http" | wc -l | tr -d '[:space:]')
 
 # Celkový počet znaků stránky
-# wc -m: počítá znaky (ne bajty), výstup očistíme od prázdných znaků pomocí tr
+# wc -m: počítá znaky (ne bajty)
 CHAR_COUNT=$(echo "$PAGE_CONTENT" | wc -m | tr -d '[:space:]')
 
 # Počet výskytů tagu "<p>"
-# Hledáme striktně "<p>" (předpokládáme přesný match, neřešíme atributy jako <p class="...">)
-P_TAG_COUNT=$(echo "$PAGE_CONTENT" | grep -o "<p>" | wc -l | tr -d '[:space:]')
+P_TAG_COUNT=$(echo "$PAGE_CONTENT" | grep -oiE '<p[^>]*>' | wc -l | tr -d '[:space:]')
 
 # Výstup
 echo "================================="

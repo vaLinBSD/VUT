@@ -1,26 +1,20 @@
 #!/bin/bash
 
 # =======================================================
-# Skript pro třídění souborů (kompatibilní s Bash 3.2)
+# Skript pro třídění souborů do adresářů podle MIME typu
+# (kompatibilní s Bash v3.2)
 # =======================================================
 
 echo "Spouštím třídění souborů v aktuálním adresáři..."
 
-for filename in *; do
-    # Zkontrolujeme, zda se jedná o běžný soubor (-f) a zda to není samotný skript
-    if [ -f "$filename" ] && [ "$filename" != "$0" ]; then
+for FILE in *; do
+    # Zkontrolujeme, zda se jedná o běžný soubor (-f) a zda to není tento skript
+    if [ -f "$FILE" ] && [ "$FILE" != "$0" ]; then
 
-        # Extrakce koncovky
-        # Získání textu za poslední tečkou
-        extension="${filename##*.}"
+        # Získání koncovky a převod na malá písmena pro spolehlivé porovnání v 'case'
+        EXT=$(echo "${FILE##*.}" | tr '[:upper:]' '[:lower:]')
 
-        # Převod koncovky na malá písmena pro spolehlivé porovnání v 'case'
-        ext_lower=$(echo "$extension" | tr '[:upper:]' '[:lower:]')
-
-        MIME_TYPE="" # Inicializace proměnné
-
-        # Mapování koncovky na MIME typ pomocí 'case'
-        case "$ext_lower" in
+        case "$EXT" in
             doc)
                 MIME_TYPE="application/msword"
                 ;;
@@ -37,7 +31,7 @@ for filename in *; do
                 MIME_TYPE="image/jpeg"
                 ;;
             *)
-                # Koncovka neodpovídá žádnému podporovanému typu
+                # Koncovka neodpovídá žádnému MIME typu ze seznamu
                 MIME_TYPE=""
                 ;;
         esac
@@ -45,23 +39,16 @@ for filename in *; do
         # Pokud byl nalezen podporovaný MIME typ, proveď přesun
         if [ -n "$MIME_TYPE" ]; then
             
-            # Cílová cesta je definována MIME typem (např. image/jpeg)
-            TARGET_PATH="./$MIME_TYPE"
-
-            echo "Nalezen soubor: $filename"
-            echo "  -> Typ: $MIME_TYPE"
-
             # Vytvoření cílové podsložky, pokud neexistuje
-            if [ ! -d "$TARGET_PATH" ]; then
-                mkdir -p "$TARGET_PATH"
-                echo "  -> Vytvořena složka $TARGET_PATH"
+            if [ ! -d "$MIME_TYPE" ]; then
+                mkdir -p "$MIME_TYPE"
             fi
 
             # Přesunutí souboru
-            mv "$filename" "$TARGET_PATH/"
-            echo "  -> Soubor přesunut."
+            mv "$FILE" "$MIME_TYPE/"
+            echo "Soubor '$FILE' přesunut do složky '$MIME_TYPE/'"
         fi
     fi
 done
 
-echo "Třídění dokončeno. Nepodporované soubory byly ignorovány."
+echo "Třídění dokončeno."
