@@ -51,4 +51,4 @@ for FILE in *; do
     fi
 done
 
-echo "Třídění dokončeno."
+echo "...třídění dokončeno."

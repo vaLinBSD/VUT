@@ -6,24 +6,18 @@
 # =======================================================
 
 # Kontrola, zda byl zadán parametr URL
-URL="$1"
-if [ -z "$URL" ]; then
-    echo "Chyba: Skript vyžaduje zadání URL stránky jako argument."
+if [ $# -ne 1 ]; then
+    echo "Chyba: skript vyžaduje zadání URL stránky"
     echo "Použití: $0 URL_stránky"
     exit 1
 fi
+URL="$1"
 
 # Stažení HTML obsahu do proměnné
 # -s: tichý režim
 # -L: sleduje přesměrování
 # --compressed: umožňuje přijímat komprimovaný obsah (např. seznam.cz)
 PAGE_CONTENT=$(curl -s -L --compressed "$URL")
-
-# Kontrola, zda curl vrátil chybu
-if [ $? -ne 0 ]; then
-    echo "Chyba: Nepodařilo se stáhnout obsah stránky $URL."
-    exit 2
-fi
 
 # Počet výskytů řetězce "http"
 # grep -o: vypíše každý nalezený řetězec na nový řádek
