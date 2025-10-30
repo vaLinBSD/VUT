@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # =======================================================
 # Skript pro třídění souborů do adresářů podle MIME typu
