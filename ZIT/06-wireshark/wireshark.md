@@ -64,3 +64,5 @@ Pakety:
    21 0.161040904 Routerboardc_b0:4d:97 → Broadcast    ARP 60 Who has 192.168.1.112? Tell 192.168.1.1
    22 0.468477302 192.168.1.166 → 192.168.1.1  DNS 88 Standard query 0x62e3 A ogads-pa.clients6.google.com
    23 0.468577888 192.168.1.166 → 192.168.1.1  DNS 88 Standard query 0x7a0c AAAA ogads-pa.clients6.google.com
+
+   22 0.067997337 192.168.1.166 → 142.251.36.100 TCP 66 49596 → 443 [ACK] Seq=1 Ack=1 Win=64512 Len=0 TSval=2206405886 TSecr=93741002
