@@ -40,3 +40,27 @@ TLS
     * TLS (Transport Layer Security) je kryptografický protokol, který zajišťuje důvěrnost a integritu nad TCP
 
 Pakety: 
+
+    1 0.000000000      0.0.0.0 → 255.255.255.255 DHCP 339 DHCP Request  - Transaction ID 0xc4edb3f4
+    2 0.014649952  192.168.1.1 → 192.168.1.166 DHCP 342 DHCP ACK      - Transaction ID 0xc4edb3f4
+    3 0.027513265 Intel_75:ce:a2 → Broadcast    ARP 42 Who has 192.168.1.1? Tell 192.168.1.166
+    4 0.028379011 Routerboardc_b0:4d:97 → Intel_75:ce:a2 ARP 60 192.168.1.1 is at e4:8d:8c:b0:4d:97
+    5 0.031360420 192.168.1.166 → 192.168.1.1  DNS 85 Standard query 0x48f6 A www.google.com OPT
+    6 0.031581348 192.168.1.166 → 192.168.1.1  DNS 85 Standard query 0x246d AAAA www.google.com OPT
+    7 0.044684297  192.168.1.1 → 192.168.1.166 DNS 90 Standard query response 0x48f6 A www.google.com A 142.251.36.100
+    8 0.045040802 192.168.1.166 → 192.168.1.1  DNS 74 Standard query 0xa1bd A www.google.com
+    9 0.046542218  192.168.1.1 → 192.168.1.166 DNS 102 Standard query response 0x246d AAAA www.google.com AAAA 2a00:1450:4014:80b::2004
+   10 0.046782194 192.168.1.166 → 192.168.1.1  DNS 74 Standard query 0x79fb AAAA www.google.com
+   11 0.048360342  192.168.1.1 → 192.168.1.166 DNS 90 Standard query response 0xa1bd A www.google.com A 142.251.36.100
+   12 0.049924937  192.168.1.1 → 192.168.1.166 DNS 102 Standard query response 0x79fb AAAA www.google.com AAAA 2a00:1450:4014:80b::2004
+   13 0.051510918 192.168.1.166 → 142.251.36.100 TCP 74 49596 → 443 [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM TSval=2206405876 TSecr=0 WS=1024
+   14 0.051690145 192.168.1.166 → 142.251.36.100 TCP 74 49598 → 443 [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM TSval=2206405876 TSecr=0 WS=1024
+   15 0.061277991 142.251.36.100 → 192.168.1.166 TCP 74 443 → 49596 [SYN, ACK] Seq=0 Ack=1 Win=65535 Len=0 MSS=1412 SACK_PERM TSval=93741002 TSecr=2206405876 WS=256
+   16 0.062430956 142.251.36.100 → 192.168.1.166 TCP 74 443 → 49598 [SYN, ACK] Seq=0 Ack=1 Win=65535 Len=0 MSS=1412 SACK_PERM TSval=4142974453 TSecr=2206405876 WS=256
+   17 0.062687676 192.168.1.166 → 142.251.36.100 TLSv1.2 1790 Client Hello (SNI=www.google.com)
+   18 0.064001550 192.168.1.166 → 142.251.36.100 TLSv1.2 1854 Client Hello (SNI=www.google.com)
+   19 0.108090515 142.251.36.100 → 192.168.1.166 TLSv1.3 2866 Server Hello, Change Cipher Spec
+   20 0.110708617 142.251.36.100 → 192.168.1.166 TLSv1.3 1466 Server Hello, Change Cipher Spec
+   21 0.161040904 Routerboardc_b0:4d:97 → Broadcast    ARP 60 Who has 192.168.1.112? Tell 192.168.1.1
+   22 0.468477302 192.168.1.166 → 192.168.1.1  DNS 88 Standard query 0x62e3 A ogads-pa.clients6.google.com
+   23 0.468577888 192.168.1.166 → 192.168.1.1  DNS 88 Standard query 0x7a0c AAAA ogads-pa.clients6.google.com
